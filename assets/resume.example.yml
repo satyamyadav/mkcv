@@ -1,0 +1,60 @@
+# mkcv data file. Only `profile.name` is strictly required — every other
+# field is optional and the layout adapts when it is omitted.
+meta:
+  template: "modern"
+  language: "en"
+  accent_color: "#dc3522"
+
+profile:
+  name: "Your Name"
+  title: "Systems Engineer"
+  email: "you@example.com"
+  phone: "+1 555 0100"
+  location: "Remote"
+  website: "https://example.com"
+  github: "example-user"
+  linkedin: "example-user"
+
+summary: >
+  Systems engineer focused on high-throughput data infrastructure and
+  developer tooling. I like small binaries, fast feedback loops, and code
+  that reads like the surrounding code.
+
+experience:
+  - company: "Core Tech Ltd"
+    role: "Backend Engineer"
+    location: "Remote"
+    period: "2024 - Present"
+    bullets:
+      - "Designed a high-throughput data processing architecture saving 30% compute overhead."
+      - "Maintained local production setups using infrastructure-as-code patterns."
+      - "Mentored two junior engineers and led the migration to a typed config system."
+  - company: "Startup Inc"
+    role: "Software Engineer"
+    location: "Berlin, DE"
+    period: "2022 - 2024"
+    bullets:
+      - "Built the internal CLI toolchain adopted by 40+ engineers."
+      - "Cut CI times by 55% by parallelising the test suite."
+
+projects:
+  - name: "mkcv"
+    description: "Zero-dependency CV compiler in Rust + Typst"
+    link: "https://github.com/example-user/mkcv"
+    bullets:
+      - "Single static binary compiles YAML to a pixel-perfect PDF in under 150ms."
+
+education:
+  - institution: "State University"
+    degree: "B.Sc. Computer Science"
+    location: "Boston, MA"
+    period: "2018 - 2022"
+    details: "Graduated with honors. Focus on distributed systems."
+
+skills:
+  - category: "Languages"
+    items: ["Rust", "Go", "TypeScript", "Python"]
+  - category: "Infrastructure"
+    items: ["Kubernetes", "Terraform", "PostgreSQL", "Redis"]
+  - category: "Tools"
+    items: ["Git", "Linux", "Typst", "gRPC"]

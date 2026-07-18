@@ -1,0 +1,41 @@
+# A cover letter (meta.kind: cover-letter). Shares the header with the resume
+# template. All details are sample placeholders.
+meta:
+  kind: cover-letter
+  template: "classic"
+  color: "red"
+  section_highlight: "three-letter"
+
+profile:
+  first_name: "Sam"
+  last_name: "Sample"
+  positions: ["Software Engineer", "Web Developer"]
+  address: "123 Example Street, Anytown, USA"
+  email: "sam@example.com"
+  mobile: "+1 555 0100"
+  homepage: "https://example.com"
+  github: "example-user"
+  linkedin: "example-user"
+
+footer:
+  left: "{today}"
+  center: "Sam Sample · Cover Letter"
+  right: ""
+
+letter:
+  recipient_name: "Hiring Team"
+  recipient_address: "Example Inc.\n1 Example Plaza\nAnytown, USA 00000"
+  date: "{today}"
+  title: "Application for Senior Software Engineer"
+  opening: "Dear Hiring Manager,"
+  sections:
+    - title: "About Me"
+      body:
+        - "I'm a software engineer with several years building **front-end** systems and developer tooling. I care about fast feedback loops and code that reads like the surrounding code."
+        - "Most recently I led the redesign of a dashboard framework, shipping features used across dozens of internal services."
+    - title: "Why Example Inc.?"
+      body:
+        - "Your focus on *developer experience* and open-source tooling maps directly to what I love building. I'd be glad to contribute to that mission."
+  closing: "Sincerely,"
+  enclosure: "Resume"
+  enclosure_label: "Attached"

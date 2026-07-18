@@ -1,0 +1,81 @@
+# Showcases WS1 styling features: a named color preset, the three-letter
+# section highlight, a multi-position header with address + quote, a custom
+# section order, and a footer. All details are sample placeholders.
+meta:
+  template: "modern"
+  color: "orange"          # named preset instead of a hex
+  section_highlight: "three-letter" # accent only the first 3 letters
+  paper: "a4"
+
+profile:
+  first_name: "Sam"
+  last_name: "Sample"
+  positions: ["Software Engineer", "Javascript Developer"]
+  address: "123 Example Street, Anytown, USA"
+  email: "sam@example.com"
+  mobile: "+1 555 0100"
+  homepage: "https://example.com"
+  github: "example-user"
+  linkedin: "example-user"
+  twitter: "example_user"
+  quote: "Be the change that you want to see in the world."
+
+footer:
+  left: "{today}"
+  center: "Sam Sample - Resume"
+  right: "{page}"
+
+# Custom section order (skills before experience).
+order: [summary, skills, experience, projects, education, honors, extracurricular]
+
+summary: >
+  Software engineer focused on **front-end** and *JavaScript*, currently at
+  [Example Corp](https://example.com). I like small binaries and fast feedback.
+
+skills:
+  # Free-form `text` (with markup) instead of a discrete list.
+  - category: "Relevant skills"
+    text: "**Libraries** - React, Redux · **Frameworks** - Angular, Express · **TDD** - Jest, Mocha"
+  # Discrete `items` list still works too.
+  - category: "Also working with"
+    items: ["Heroku", "AWS", "MongoDB", "Redis"]
+
+experience:
+  - company: "Example Corp"
+    role: "Software Development Engineer - Front End"
+    location: "Anytown, USA"
+    period: "Aug. 2016 - Present"
+    bullets:
+      - "Built a **dashboard-builder framework** with widgets, layouts, and filters."
+      - "Initiated a *micro-frontend* architecture on a private registry."
+
+projects:
+  - name: "postgres-express"
+    description: "A boilerplate using PostgreSQL and Express with TDD"
+    link: "https://example.com/postgres-express"
+    bullets:
+      - "*Technology*: Express, Node.js, PostgreSQL, Knex, Mocha & chai."
+      - "*Link*: [github](https://example.com/postgres-express)"
+
+education:
+  - institution: "City University"
+    degree: "Computer Science and Engineering"
+    location: "Anytown, USA"
+    period: "Jul. 2012 - May 2016"
+    details: "Bachelor of Technology — HONORS."
+
+honors:
+  - subsection: "International"
+    items:
+      - { award: "Finalist", event: "Global Hackathon World Final", location: "Anytown, USA", date: "2017" }
+      - { award: "2nd Place", event: "Regional Code Challenge", location: "Sometown, USA", date: "2016" }
+  - subsection: "Domestic"
+    items:
+      - { award: "Winner", event: "University Dev Contest", location: "Anytown, USA", date: "2015" }
+
+extracurricular:
+  - heading: "Dev Community Meetup"
+    location: "Anytown, USA"
+    date: "Dec. 2017"
+    bullets:
+      - "Organized workshops on web components, serverless computing, and PWAs."

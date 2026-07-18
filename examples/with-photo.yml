@@ -1,0 +1,33 @@
+# Resume with a profile photo in the header. The photo path is resolved
+# relative to this file. All details are sample placeholders.
+meta:
+  color: "skyblue"
+  section_highlight: "three-letter"
+
+profile:
+  first_name: "Sam"
+  last_name: "Sample"
+  positions: ["Software Engineer"]
+  email: "sam@example.com"
+  location: "Anytown, USA"
+  github: "example-user"
+  photo:
+    path: "assets/photo.png"
+    shape: "circle"
+    side: "right"
+    edge: true
+
+summary: >
+  Software engineer who likes small binaries and fast feedback loops.
+
+experience:
+  - company: "Example Corp"
+    role: "Software Engineer"
+    location: "Anytown, USA"
+    period: "2021 - Present"
+    bullets:
+      - "Built a dashboard framework used across dozens of services."
+
+skills:
+  - category: "Languages"
+    items: ["Rust", "TypeScript", "Go"]

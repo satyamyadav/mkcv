@@ -1,0 +1,70 @@
+# A full, multi-section resume exercising every field in the schema.
+# All names, contacts, employers, and schools are sample placeholders.
+meta:
+  template: "modern"
+  accent_color: "#2b6cb0"
+
+profile:
+  name: "Jane Doe"
+  title: "Staff Software Engineer"
+  email: "jane.doe@example.com"
+  phone: "+1 555 0100"
+  location: "Anytown, USA"
+  website: "https://example.com"
+  github: "example-user"
+  linkedin: "example-user"
+
+summary: >
+  Staff engineer with 10+ years building distributed systems and developer
+  platforms. I lead through design, mentor across teams, and ship reliable
+  software at scale.
+
+experience:
+  - company: "Cloud Systems Inc"
+    role: "Staff Software Engineer"
+    location: "Anytown, USA"
+    period: "2021 - Present"
+    bullets:
+      - "Led the redesign of the multi-region control plane, cutting failover time from 90s to under 8s."
+      - "Grew the platform team from 4 to 12 engineers while keeping on-call load flat."
+      - "Drove adoption of a typed config framework now used across 30+ services."
+  - company: "Data Platform Co"
+    role: "Senior Backend Engineer"
+    location: "Remote"
+    period: "2017 - 2021"
+    bullets:
+      - "Built a streaming ingestion pipeline handling 2M events/sec at p99 < 40ms."
+      - "Reduced cloud spend 38% by rearchitecting the storage tier."
+  - company: "Analytics Startup"
+    role: "Software Engineer"
+    location: "Sometown, USA"
+    period: "2014 - 2017"
+    bullets:
+      - "Shipped the first version of the analytics API adopted by 500+ customers."
+
+projects:
+  - name: "openschema"
+    description: "Schema-first codegen for gRPC and REST"
+    link: "https://example.com/openschema"
+    bullets:
+      - "3.5k GitHub stars; used in production by several mid-size companies."
+  - name: "ratelimit-rs"
+    description: "Lock-free token-bucket rate limiter"
+    link: "https://example.com/ratelimit-rs"
+    bullets:
+      - "Zero-allocation hot path benchmarked at 60M ops/sec/core."
+
+education:
+  - institution: "Northgate University"
+    degree: "M.Eng. Computer Science"
+    location: "Anytown, USA"
+    period: "2010 - 2014"
+    details: "First-class honours. Dissertation on consensus under partial synchrony."
+
+skills:
+  - category: "Languages"
+    items: ["Rust", "Go", "Java", "TypeScript", "Python"]
+  - category: "Infrastructure"
+    items: ["Kubernetes", "Terraform", "Kafka", "PostgreSQL", "Redis"]
+  - category: "Practices"
+    items: ["Distributed systems", "Observability", "Mentoring", "System design"]

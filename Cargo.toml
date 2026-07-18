@@ -1,0 +1,42 @@
+[package]
+name = "mkcv"
+version = "0.1.0"
+edition = "2021"
+description = "A lightning-fast, zero-dependency CV compiler: YAML in, pixel-perfect PDF out."
+license = "MIT"
+
+[[bin]]
+name = "mkcv"
+path = "src/main.rs"
+
+[dependencies]
+typst = "0.15"
+typst-pdf = "0.15"
+# Typst's fallback fonts (~7 MB) are only pulled in when the `fallback-fonts`
+# feature is enabled. By default we ship just the embedded Liberation Sans text
+# family and Tabler Icons.
+typst-assets = { version = "0.15", features = ["fonts"], optional = true }
+serde = { version = "1", features = ["derive"] }
+serde_yaml = "0.9"
+serde_json = "1"
+clap = { version = "4", features = ["derive"] }
+notify = "6"
+anyhow = "1"
+comemo = "0.4"
+typst-layout = "0.15"
+# Already in the tree via typst; the local-offset feature lets the footer date
+# reflect the user's local timezone rather than UTC.
+time = { version = "0.3", features = ["local-offset"] }
+
+[features]
+default = []
+# Bundle Typst's full fallback fonts for CJK / emoji / math glyph coverage,
+# at the cost of a much larger binary.
+fallback-fonts = ["dep:typst-assets"]
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
+panic = "abort"

@@ -1,0 +1,83 @@
+# formal classic style (blue, left-margin dates). Sample placeholder data.
+# resume. All details are sample placeholders.
+meta:
+  template: "formal"
+profile:
+  first_name: "Sam"
+  last_name: "Sample"
+  positions: ["Software Engineer", "Javascript Developer"]
+  address: "123 Example Street, Anytown, USA 00000"
+  mobile: "+1 555 0100"
+  email: "sam@example.com"
+  homepage: "example.com"
+  github: "example-user"
+  linkedin: "example-user"
+
+footer:
+  left: "{today}"
+  center: "Sam Sample · Resume"
+  right: "{page}"
+
+summary: >
+  I am a software engineer with several years of experience in *front-end
+  development* and *JavaScript*, currently working at **Example Corp**. I care
+  about the interfaces people touch and about architecting resilient systems.
+
+skills:
+  - category: "Currently focusing on"
+    text: "JavaScript (ES6), Node.js, Functional programming, Design patterns."
+  - category: "Relevant skills"
+    text: "**Libraries** - React, Redux · **Frameworks** - Angular, Express · **TDD** - Jest, Mocha, Chai · **Version control** - Git"
+  - category: "Also working with"
+    text: "Heroku, Google Cloud, AWS, MongoDB, Redis."
+
+experience:
+  - company: "Example Corp"
+    role: "Software Development Engineer - Front End"
+    location: "Anytown, USA"
+    period: "Aug. 2016 - Present"
+    bullets:
+      - "Working on a care-intelligence platform; part of the product team focused on new features, scalability, and release cycles."
+      - "Built a dashboard-builder framework with widgets, layouts, and filters for data visualization."
+      - "Initiated a **micro-frontend** architecture, moving modules to independent packages on a private registry."
+  - company: "Freelance"
+    role: "Web Developer"
+    location: "Anytown, USA"
+    period: "Oct. 2015 - Aug. 2016"
+    bullets:
+      - "Built server-rendered single-page apps on top of Express with SEO-friendly rendering."
+
+projects:
+  - name: "postgres-express"
+    description: "A boilerplate using PostgreSQL and Express with TDD"
+    link: "https://example.com/postgres-express"
+    bullets:
+      - "*Technology*: Express, Node.js, PostgreSQL, Knex, Mocha & Chai."
+  - name: "pwa-shell"
+    description: "An elegant app shell for client-side progressive apps"
+    link: "https://example.com/pwa-shell"
+    bullets:
+      - "*Technology*: Service Worker, navigator, DOM API wrapper and router."
+
+education:
+  - institution: "City University"
+    degree: "Computer Science and Engineering"
+    location: "Anytown, USA"
+    period: "Jul. 2012 - May 2016"
+    details: "Bachelor of Technology — HONORS."
+
+honors:
+  - subsection: "International"
+    items:
+      - { award: "Finalist", event: "Global Hacking Competition World Final", location: "Anytown, USA", date: "2017" }
+      - { award: "6th Place", event: "Regional Security Competition Final", location: "Sometown, USA", date: "2016" }
+  - subsection: "Domestic"
+    items:
+      - { award: "3rd Place", event: "University CTF Final", location: "Anytown, USA", date: "2015" }
+
+extracurricular:
+  - heading: "Dev Conference"
+    location: "Anytown, USA"
+    date: "Dec. 2017"
+    bullets:
+      - "Attended a two-day event with codelabs and sessions on PWAs, web components, and serverless."
