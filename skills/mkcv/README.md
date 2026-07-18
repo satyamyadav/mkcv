@@ -3,7 +3,7 @@
 A Claude agent skill that compiles a `resume.yml` into a PDF resume / CV / cover
 letter via the `mkcv` CLI. It works out of the box: on first use the skill
 downloads the `mkcv` binary from the repo
-(`https://raw.githubusercontent.com/satyamyadav/mkcv/main/dist/<target>/mkcv`)
+(`https://raw.githubusercontent.com/satyamyadav/mkcv/main/dist/mkcv`)
 and caches it under `~/.cache/mkcv`.
 
 Install it any of three ways.
@@ -31,7 +31,7 @@ under `dist/`, so no download is needed):
 
 ```bash
 git clone https://github.com/satyamyadav/mkcv && cd mkcv
-export MKCV_REPO="$PWD"     # skill uses the checked-out dist/<target>/mkcv
+export MKCV_REPO="$PWD"     # skill uses the checked-out dist/mkcv
 ```
 
 Then register the repo as a Claude Code plugin per your plugin workflow.
@@ -39,14 +39,14 @@ Then register the repo as a Claude Code plugin per your plugin workflow.
 ## 3. Copy-paste
 
 Create `~/.claude/skills/mkcv/` and paste the contents of
-[`SKILL.md`](./SKILL.md) and [`scripts/ensure-binary.sh`](./scripts/ensure-binary.sh).
-The bootstrap will download the binary on first use.
+[`SKILL.md`](./SKILL.md) and [`install.sh`](./install.sh). The skill fetches the
+binary on first use.
 
 ## Binary resolution
 
-`scripts/ensure-binary.sh` finds the binary in order: `$MKCV_BIN` → `mkcv` on
-`PATH` → a cached copy → a repo clone (`$MKCV_REPO` or auto-detected) →
-**download** from `$MKCV_REPO_RAW` (default: the mkcv repo's `main`).
+`install.sh --bin` finds the binary in order: `$MKCV_BIN` → `mkcv` on `PATH` → a
+cached copy → a repo clone (`$MKCV_REPO`) → **download** the platform's binary
+from `$MKCV_REPO_RAW` (default: the mkcv repo's `main`).
 
 - Set `MKCV_BIN=/path/to/mkcv` to use a specific binary.
 - Set `MKCV_REPO_RAW=https://raw.githubusercontent.com/<owner>/<branch-base>` to

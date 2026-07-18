@@ -98,19 +98,26 @@ pub struct TemplateInfo {
     pub kind: &'static str,
     pub default: bool,
     pub note: &'static str,
+    /// Preview screenshot filename (under `PREVIEW_BASE`), so an agent can offer
+    /// a visual choice. Use `PREVIEW_BASE` + this to form the URL.
+    pub preview: &'static str,
 }
+
+/// Base URL for the committed preview screenshots.
+pub const PREVIEW_BASE: &str =
+    "https://raw.githubusercontent.com/satyamyadav/mkcv/main/skills/mkcv/previews/";
 
 /// The full template catalog. Keep in sync with the routing in `build_source`.
 pub fn catalog() -> &'static [TemplateInfo] {
     &[
-        TemplateInfo { name: "modern", category: "resume", kind: "resume", default: true, note: "Minimalist, Liberation Sans." },
-        TemplateInfo { name: "crisp", category: "resume", kind: "resume", default: false, note: "Polished professional: two-tone name, first-letters section accent, org-bold entries (Roboto + Source Sans)." },
-        TemplateInfo { name: "serif", category: "resume", kind: "resume", default: false, note: "Single-column serif, ATS-friendly and compact." },
-        TemplateInfo { name: "split", category: "resume", kind: "resume", default: false, note: "Two-column: big two-tone name, narrow-left / wide-right." },
-        TemplateInfo { name: "formal", category: "cv", kind: "resume", default: false, note: "Classic CV: colored header, left-margin dates." },
-        TemplateInfo { name: "sidebar", category: "cv", kind: "resume", default: false, note: "Two-column with a colored sidebar, photo, and skill tags." },
-        TemplateInfo { name: "modern", category: "coverletter", kind: "cover-letter", default: true, note: "Header-styled cover letter." },
-        TemplateInfo { name: "classic", category: "coverletter", kind: "cover-letter", default: false, note: "Formal serif business letter." },
+        TemplateInfo { name: "modern", category: "resume", kind: "resume", default: true, note: "Minimalist, Liberation Sans.", preview: "modern.png" },
+        TemplateInfo { name: "crisp", category: "resume", kind: "resume", default: false, note: "Polished professional: two-tone name, first-letters section accent, org-bold entries (Roboto + Source Sans).", preview: "crisp.png" },
+        TemplateInfo { name: "serif", category: "resume", kind: "resume", default: false, note: "Single-column serif, ATS-friendly and compact.", preview: "serif.png" },
+        TemplateInfo { name: "split", category: "resume", kind: "resume", default: false, note: "Two-column: big two-tone name, narrow-left / wide-right.", preview: "split.png" },
+        TemplateInfo { name: "formal", category: "cv", kind: "resume", default: false, note: "Classic CV: colored header, left-margin dates.", preview: "formal.png" },
+        TemplateInfo { name: "sidebar", category: "cv", kind: "resume", default: false, note: "Two-column with a colored sidebar, photo, and skill tags.", preview: "sidebar.png" },
+        TemplateInfo { name: "modern", category: "coverletter", kind: "cover-letter", default: true, note: "Header-styled cover letter.", preview: "modern-letter.png" },
+        TemplateInfo { name: "classic", category: "coverletter", kind: "cover-letter", default: false, note: "Formal serif business letter.", preview: "classic-letter.png" },
     ]
 }
 

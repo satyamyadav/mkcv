@@ -28,13 +28,16 @@ Use this skill when any of these hold:
 Follow the steps in order. Prefer `--format json` and read the `ok` field.
 
 ### 1. Get the binary
-Run the bundled bootstrap and **capture its stdout** as the binary path (it
-resolves `$MKCV_BIN` → `mkcv` on PATH → cache → the repo's committed
-`dist/<target>/mkcv`, downloading once if needed):
+This skill bundles `install.sh` next to this SKILL.md. Run it in `--bin` mode
+(the same script that installs the skill) with its **full path** and capture its
+stdout as the binary path. For a Claude Code install that is:
 ```bash
-BIN=$(bash "$CLAUDE_SKILL_DIR/scripts/ensure-binary.sh") || { echo "$BIN"; exit 1; }
+BIN="$(sh ~/.claude/skills/mkcv/install.sh --bin)" || { echo "$BIN"; exit 1; }
 ```
-If it prints an error (e.g. an unsupported platform), report it and stop.
+Use the actual install path if different (do not rely on `$CLAUDE_SKILL_DIR` — it
+may be unset). `--bin` resolves `$MKCV_BIN` → `mkcv` on `PATH` → a cached copy →
+the platform's binary from `dist/` (downloading once if needed). If it errors
+(e.g. no prebuilt for this platform), report it and stop.
 
 ### 2. Discover templates + schema (don't guess field names)
 ```bash
@@ -44,6 +47,10 @@ If it prints an error (e.g. an unsupported platform), report it and stop.
 Templates — resume: `modern` (default), `crisp`, `serif`, `split`; cv:
 `formal`, `sidebar`; cover letters: `modern`, `classic` (set
 `meta.kind: cover-letter`). `meta.template` may also be a local `./file.typ`.
+
+Each entry in `templates` includes a **`preview`** image URL. When the user
+hasn't picked a template (or asks to see the options), show them the previews
+so they can choose visually, then set `meta.template` to their pick.
 
 ### 3. Author or edit `resume.yml`
 - No file yet → `"$BIN" init` writes a complete boilerplate to `resume.yml`.

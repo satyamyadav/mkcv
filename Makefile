@@ -4,7 +4,6 @@
 
 BIN         := target/release/mkcv
 DEBUG_BIN   := target/debug/mkcv
-TARGET      := $(shell rustc -vV | sed -n 's/host: //p')
 INPUT       ?= resume.yml
 OUTPUT      ?= resume.pdf
 EXAMPLES    := $(wildcard examples/*.yml)
@@ -99,13 +98,13 @@ test:
 size: release
 	@ls -lh $(BIN) | awk '{print "release binary: " $$5}'
 
-## dist: Build the release binary and copy it into dist/<host-target>/ (for the skill to fetch).
+## dist: Build the release binary and copy it to dist/mkcv (Linux x86_64, for the skill to fetch).
 .PHONY: dist
 dist: release
-	@mkdir -p dist/$(TARGET)
-	@cp $(BIN) dist/$(TARGET)/mkcv
-	@chmod +x dist/$(TARGET)/mkcv
-	@ls -lh dist/$(TARGET)/mkcv | awk '{print "dist: dist/$(TARGET)/mkcv (" $$5 ")"}'
+	@mkdir -p dist
+	@cp $(BIN) dist/mkcv
+	@chmod +x dist/mkcv
+	@ls -lh dist/mkcv | awk '{print "dist: dist/mkcv (" $$5 ")"}'
 
 ## install: Install the binary into ~/.cargo/bin.
 .PHONY: install

@@ -184,7 +184,13 @@ fn cmd_templates(fmt: Format) -> Result<()> {
         Format::Json => {
             let arr: Vec<_> = entries
                 .iter()
-                .map(|t| json!({ "name": t.name, "category": t.category, "kind": t.kind, "default": t.default, "note": t.note }))
+                .map(|t| {
+                    json!({
+                        "name": t.name, "category": t.category, "kind": t.kind,
+                        "default": t.default, "note": t.note,
+                        "preview": format!("{}{}", template::PREVIEW_BASE, t.preview),
+                    })
+                })
                 .collect();
             println!("{}", json!({ "templates": arr }));
         }
@@ -198,6 +204,7 @@ fn cmd_templates(fmt: Format) -> Result<()> {
                 }
                 println!();
             }
+            println!("Preview screenshots: {}<name>.png", template::PREVIEW_BASE);
         }
     }
     Ok(())

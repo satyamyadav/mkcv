@@ -32,6 +32,26 @@ from [Tabler Icons](https://tabler.io/icons) (MIT); all fonts (Liberation
 Sans/Serif, Roboto, Source Sans 3, Tabler) are embedded, so the binary is
 self-contained.
 
+### Gallery
+
+<table>
+  <tr>
+    <td align="center"><a href="skills/mkcv/previews/modern.png"><img src="skills/mkcv/previews/modern.png" width="150"></a><br><b>modern</b></td>
+    <td align="center"><a href="skills/mkcv/previews/crisp.png"><img src="skills/mkcv/previews/crisp.png" width="150"></a><br><b>crisp</b></td>
+    <td align="center"><a href="skills/mkcv/previews/serif.png"><img src="skills/mkcv/previews/serif.png" width="150"></a><br><b>serif</b></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="skills/mkcv/previews/split.png"><img src="skills/mkcv/previews/split.png" width="150"></a><br><b>split</b></td>
+    <td align="center"><a href="skills/mkcv/previews/formal.png"><img src="skills/mkcv/previews/formal.png" width="150"></a><br><b>formal</b></td>
+    <td align="center"><a href="skills/mkcv/previews/sidebar.png"><img src="skills/mkcv/previews/sidebar.png" width="150"></a><br><b>sidebar</b></td>
+  </tr>
+</table>
+
+Cover letters: <b>modern</b> ([preview](skills/mkcv/previews/modern-letter.png)) ·
+<b>classic</b> ([preview](skills/mkcv/previews/classic-letter.png)). The
+`templates` command returns a `preview` URL for each, so an agent can show you a
+visual choice.
+
 ## Install
 
 `mkcv` is built to be used as an **agent skill**. Install the skill once and
@@ -51,7 +71,8 @@ The skill is just three files under `skills/mkcv/`. Install it any of these
 ways (into your agent's skills directory — `~/.claude/skills/mkcv` for Claude
 Code; other agents use their own location):
 
-**a) One-line remote installer** (`curl | sh`) — no clone needed:
+**a) One-line remote installer** (`curl | sh`) — no clone needed. One script
+installs the skill **and** fetches the right binary for your platform:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/satyamyadav/mkcv/main/skills/mkcv/install.sh | sh
@@ -67,14 +88,13 @@ cp -r mkcv/skills/mkcv ~/.claude/skills/mkcv          # or symlink it
 export MKCV_REPO="$PWD/mkcv"                          # use the checked-out dist/ binary
 ```
 
-**c) Copy-paste** — create `~/.claude/skills/mkcv/SKILL.md` and
-`scripts/ensure-binary.sh` and paste the contents from
-[`skills/mkcv/`](skills/mkcv/). Or set `MKCV_BIN=/path/to/mkcv` to skip the
-download entirely.
+**c) Copy-paste** — create `~/.claude/skills/mkcv/` and paste the contents of
+[`SKILL.md`](skills/mkcv/SKILL.md) and [`install.sh`](skills/mkcv/install.sh).
+Or set `MKCV_BIN=/path/to/mkcv` to skip the download entirely.
 
-The bootstrap (`scripts/ensure-binary.sh`) resolves the binary via `MKCV_BIN` →
-`mkcv` on `PATH` → cache → a repo clone (`MKCV_REPO`) → download from the repo's
-`dist/` — so every install path ends up with a working binary.
+That single `install.sh` is also the skill's binary resolver: in `--bin` mode it
+returns a runnable binary via `MKCV_BIN` → `mkcv` on `PATH` → cache → a repo
+clone (`MKCV_REPO`) → download the platform's binary from `dist/`.
 
 ### Standalone CLI (optional)
 
@@ -83,7 +103,7 @@ a normal CLI you can run directly for CI, scripts, or agent-free use:
 
 ```bash
 # prebuilt binary (Linux x86_64 today; others: build from source)
-curl -fsSL https://raw.githubusercontent.com/satyamyadav/mkcv/main/dist/x86_64-unknown-linux-gnu/mkcv -o mkcv && chmod +x mkcv
+curl -fsSL https://raw.githubusercontent.com/satyamyadav/mkcv/main/dist/mkcv -o mkcv && chmod +x mkcv
 
 # or from source
 git clone https://github.com/satyamyadav/mkcv && cd mkcv && cargo install --path .
