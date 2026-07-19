@@ -1,0 +1,43 @@
+{
+  "skill_name": "mkcv",
+  "evals": [
+    {
+      "id": 1,
+      "name": "blank-page-draft",
+      "prompt": "make me a resume. i'm a backend engineer, about 5 years, worked at Stripe and a startup before that. targeting senior backend roles.",
+      "persona_sheet": "eval-files/persona-1-blankpage.md",
+      "expected_output": "Skill drafts a complete first-draft PDF immediately (inventing plausible content marked with the ‹?› token), asks for/acknowledges the target role, offers template previews, then interviews to replace guesses with real facts, reviews the collected info, and builds a final clean PDF with no ‹?› markers left.",
+      "files": [],
+      "expectations": [
+        "A real PDF was produced (build ok:true, file exists).",
+        "A complete first-draft resume was built EARLY (draft-first, before the interview finished).",
+        "The early draft invented plausible content marked with the ‹?› token.",
+        "The skill offered a template choice (previews/named options, set meta.template).",
+        "The skill interviewed the user rather than fabricating everything silently.",
+        "The final resume has no remaining ‹?› markers.",
+        "The skill did NOT open with a long questionnaire before drafting."
+      ]
+    },
+    {
+      "id": 2,
+      "name": "ingest-and-tailor",
+      "prompt": "here's my current resume (a .txt file) — can you rework it for this Senior Platform Engineer role at Northwind Cloud? job posting is in the provided file too.",
+      "persona_sheet": "eval-files/persona-2-tailor.md",
+      "expected_output": "Skill ingests the local old-resume file and the job-posting file, tailors the resume to the posting (reorders/surfaces k8s + reliability + SLO + tooling experience, mirrors real keywords, no fabrication), coaches the vague bullets into action+impact+number form, and builds a tailored PDF.",
+      "files": [
+        "eval-files/old-resume.txt",
+        "eval-files/job-posting.txt"
+      ],
+      "expectations": []
+    },
+    {
+      "id": 3,
+      "name": "coach-weak-bullets",
+      "prompt": "i already started my resume but the bullets feel weak and generic. can you make them stronger? (provides 4 flat duty-list bullets for a data engineer)",
+      "persona_sheet": "eval-files/persona-3-coaching.md",
+      "expected_output": "Skill rewrites each weak duty-list bullet into action-verb + specific-outcome + quantified-impact form, asking the user for the missing numbers, and produces a stronger set of bullets (and builds a PDF).",
+      "files": [],
+      "expectations": []
+    }
+  ]
+}
