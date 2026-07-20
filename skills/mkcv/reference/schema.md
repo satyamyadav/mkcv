@@ -22,7 +22,8 @@ patterns above are interpreted, and everything else is escaped (no raw Typst).
 
 ```yaml
 meta:
-  template: "modern"        # see `mkcv templates`, or a local ./file.typ
+  template: "modern"        # see `mkcv templates`; or a local ./file.typ
+                            # (customize: `mkcv eject <name> -o my.typ`, then edit)
   kind: "resume"            # resume | cover-letter
   color: "orange"   # named preset or #hex
   section_highlight: "full" # full | three-letter | none

@@ -93,6 +93,22 @@ enum Command {
     /// List the available templates and how to select them.
     Templates,
 
+    /// Copy a built-in template's source to a local .typ file to customize,
+    /// then select it with `meta.template: "./<file>.typ"`.
+    Eject {
+        /// Template name to copy (see `templates`).
+        name: String,
+        /// Output path (default: <name>.typ).
+        #[arg(short, long)]
+        output: Option<PathBuf>,
+        /// Copy the cover-letter variant (disambiguates "modern").
+        #[arg(short, long)]
+        kind: Option<String>,
+        /// Overwrite the file if it already exists.
+        #[arg(short, long)]
+        force: bool,
+    },
+
     /// Describe the YAML data schema.
     Schema,
 
@@ -130,6 +146,9 @@ fn run(cli: Cli) -> Result<()> {
             Overrides { template: template.as_deref(), kind: kind.as_deref() },
         ),
         Command::Templates => cmd_templates(fmt),
+        Command::Eject { name, output, kind, force } => {
+            cmd_eject(&name, output.as_deref(), kind.as_deref(), force, fmt)
+        }
         Command::Schema => cmd_schema(fmt),
         Command::Validate { input, yaml } => cmd_validate(&input, yaml.as_deref(), fmt),
     }
@@ -205,6 +224,35 @@ fn cmd_templates(fmt: Format) -> Result<()> {
                 println!();
             }
             println!("Preview screenshots: {}<name>.png", template::PREVIEW_BASE);
+        }
+    }
+    Ok(())
+}
+
+fn cmd_eject(
+    name: &str,
+    output: Option<&Path>,
+    kind: Option<&str>,
+    force: bool,
+    fmt: Format,
+) -> Result<()> {
+    let is_letter = kind == Some("cover-letter");
+    let source = template::eject_source(name, is_letter)?;
+    let out: PathBuf = output
+        .map(Path::to_path_buf)
+        .unwrap_or_else(|| PathBuf::from(format!("{name}.typ")));
+    if out.exists() && !force {
+        bail!("{} already exists (use --force to overwrite)", out.display());
+    }
+    std::fs::write(&out, source).with_context(|| format!("could not write {}", out.display()))?;
+    match fmt {
+        Format::Json => println!(
+            "{}",
+            json!({ "ok": true, "path": out.display().to_string(), "template": name })
+        ),
+        Format::Text => {
+            println!("✓ Ejected '{}' → {}", name, out.display());
+            println!("  Use it: set meta.template: \"./{}\" in your resume.yml", out.display());
         }
     }
     Ok(())

@@ -58,9 +58,17 @@ pub fn build_source(resume: &Resume, custom_body: Option<&str>) -> Result<String
 
     let template = resume.meta.template.as_str();
     let is_letter = resume.meta.kind.as_deref() == Some("cover-letter");
+    let (body, use_prelude) = route_template(template, is_letter)?;
+    let prelude = if use_prelude { PRELUDE } else { "" };
 
-    // (body, uses_shared_prelude)
-    let (body, use_prelude) = if is_letter {
+    Ok(format!("#let data = {data_literal}\n{CORE}\n{prelude}\n{body}"))
+}
+
+/// Route a (template name, is_letter) pair to its embedded body source and
+/// whether the shared prelude is required. Single source of truth shared by
+/// `build_source` and `eject_source`, so the two never drift.
+fn route_template(template: &str, is_letter: bool) -> Result<(&'static str, bool)> {
+    let pair = if is_letter {
         // Cover-letter category: the resume template name picks the letter style.
         match template {
             "classic" => (CLASSIC_LETTER, false),
@@ -84,9 +92,34 @@ pub fn build_source(resume: &Resume, custom_body: Option<&str>) -> Result<String
             ),
         }
     };
-    let prelude = if use_prelude { PRELUDE } else { "" };
+    Ok(pair)
+}
 
-    Ok(format!("#let data = {data_literal}\n{CORE}\n{prelude}\n{body}"))
+/// Produce an editable copy of a built-in template's source, for saving to a
+/// local `./file.typ` and selecting via `meta.template`. The engine prepends
+/// `#let data = (...)` + `_core.typ` to a custom template but *not* the shared
+/// prelude, so the prelude is inlined here for the templates that need it —
+/// making the ejected file compile on its own.
+pub fn eject_source(template: &str, is_letter: bool) -> Result<String> {
+    let (body, use_prelude) = route_template(template, is_letter)?;
+    let category = if is_letter { "cover-letter" } else { "resume" };
+    let self_contained_note = if use_prelude {
+        " The shared prelude is inlined below so this file is self-contained."
+    } else {
+        ""
+    };
+    let header = format!(
+        "// Ejected copy of the built-in \"{template}\" {category} template.\n\
+         // Edit freely, then set `meta.template: \"./<this-file>.typ\"` in your YAML.\n\
+         // The engine prepends `#let data = (...)` and the `_core.typ` helpers\n\
+         // (has, orelse, accent, resolve-color, ti-glyphs, footer-part, paper),\n\
+         // so `data` and those are already in scope below.{self_contained_note}\n\n"
+    );
+    Ok(if use_prelude {
+        format!("{header}{PRELUDE}\n\n{body}")
+    } else {
+        format!("{header}{body}")
+    })
 }
 
 /// One entry in the template catalog, for the `templates` discovery command.
@@ -758,6 +791,19 @@ mod tests {
         // A trailing backslash on the last line must be preserved, not dropped.
         assert_eq!(markup_to_typst("a\\"), "[a\\\\]");
         assert_eq!(markup_to_typst("path C:\\"), "[path C:\\\\]");
+    }
+
+    #[test]
+    fn eject_inlines_prelude_only_when_needed() {
+        // A prelude-based template (modern) must inline the prelude so the
+        // ejected file compiles as a custom template (which gets only core).
+        let modern = eject_source("modern", false).unwrap();
+        assert!(modern.contains("_prelude.typ"), "modern eject should inline the prelude");
+        // A self-contained template (crisp) must not.
+        let crisp = eject_source("crisp", false).unwrap();
+        assert!(!crisp.contains("_prelude.typ"), "crisp is self-contained; no prelude");
+        // Unknown names error rather than emit a broken file.
+        assert!(eject_source("bogus", false).is_err());
     }
 }
 

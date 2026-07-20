@@ -52,6 +52,11 @@ may be unset). If it errors (no prebuilt for this platform), report and stop.
 - `"$BIN" validate --input resume.yml --format json` — `{"ok":true}` or errors.
 - `"$BIN" build --input resume.yml --output resume.pdf --format json` — compiles.
   Flags: `--template <name-or-./file.typ>`, `--kind cover-letter`, `--yaml '<inline>'`.
+- `"$BIN" eject <name> --output my.typ` — copy a built-in template's source to a
+  local `.typ` to **customize** (add `--kind cover-letter` for a letter variant).
+  Prefer this over hand-writing a template: eject, tweak, then set
+  `meta.template: "./my.typ"`. The ejected file is self-contained (the prelude is
+  inlined when needed) and receives `data` + `_core.typ` helpers.
 
 Free-text fields accept a safe Markdown subset — `**bold**`/`__bold__`,
 `*italic*`/`_italic_`, `` `code` ``, `~~strike~~`, `[links](url)`, blank-line

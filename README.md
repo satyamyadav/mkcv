@@ -144,13 +144,23 @@ $ mkcv validate --yaml 'profile: {}' --format json
 
 ### Custom templates
 
-Point `meta.template` at a local `.typ` file (relative to the YAML) to compile
-your own layout:
+The fastest way to customize is to **eject** a built-in template and edit it,
+rather than starting from a blank file:
+
+```sh
+mkcv eject crisp --output my-layout.typ   # copy the "crisp" source to edit
+mkcv eject modern --kind cover-letter -o my-letter.typ
+```
+
+Then point `meta.template` at your local `.typ` file (relative to the YAML):
 
 ```yaml
 meta:
   template: "./my-layout.typ"
 ```
+
+An ejected file is self-contained (the shared prelude is inlined when the
+template needs it) and ready to compile as-is; tweak from there.
 
 A custom template receives the parsed resume as `data` plus the shared
 `_core.typ` helpers already in scope: `has`, `orelse`, `firstof`, `accent`,
