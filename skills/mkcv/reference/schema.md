@@ -2,8 +2,23 @@
 
 Run `mkcv schema --format json` for the machine-readable version. Only
 `profile.name` (or `first_name` + `last_name`) is required; everything else is
-optional and omitted sections don't render. Free-text fields accept `**bold**`,
-`*italic*`, `[links](url)`.
+optional and omitted sections don't render.
+
+**Markdown in free-text fields** (`summary`, `details`, `description`, `text`,
+`quote`, cover-letter `opening`/`closing`/`body`, and `bullets`/`items`):
+- Inline: `**bold**` / `__bold__`, `*italic*` / `_italic_`, `` `code` ``,
+  `~~strikethrough~~`, `[label](url)`.
+- Blocks: a blank line starts a new paragraph; end a line with `\` (or two
+  spaces) for a hard line break.
+- `bullets` also support **nested sub-bullets** — either indented `- ` lines
+  inside one bullet string, or separate indented `- ` array items after their
+  parent:
+  ```yaml
+  bullets:
+    - "Led the platform migration:\n  - moved 200 services\n  - zero downtime"
+  ```
+Intraword underscores (`snake_case`) and lone `~`/`#`/`$` stay literal — only the
+patterns above are interpreted, and everything else is escaped (no raw Typst).
 
 ```yaml
 meta:

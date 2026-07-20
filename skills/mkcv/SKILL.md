@@ -53,8 +53,10 @@ may be unset). If it errors (no prebuilt for this platform), report and stop.
 - `"$BIN" build --input resume.yml --output resume.pdf --format json` — compiles.
   Flags: `--template <name-or-./file.typ>`, `--kind cover-letter`, `--yaml '<inline>'`.
 
-Free-text fields accept `**bold**`, `*italic*`, `[links](url)`. Only `profile.name`
-(or `first_name`+`last_name`) is required — omit anything that doesn't apply; the
+Free-text fields accept a safe Markdown subset — `**bold**`/`__bold__`,
+`*italic*`/`_italic_`, `` `code` ``, `~~strike~~`, `[links](url)`, blank-line
+paragraphs, and nested sub-bullets in `bullets`. Only `profile.name` (or
+`first_name`+`last_name`) is required — omit anything that doesn't apply; the
 layout adapts. Full field map: `reference/schema.md`.
 
 ---

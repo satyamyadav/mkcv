@@ -247,7 +247,7 @@ fn cmd_schema(fmt: Format) -> Result<()> {
             "sections": [{ "title": "s", "body": ["paragraphs"] }], "body": ["OR flat paragraphs"],
             "closing": "s", "enclosure": "s", "enclosure_label": "s",
         },
-        "notes": "Free-text fields accept **bold**, *italic*, [links](url). Only profile name is required.",
+        "notes": "Free-text fields accept Markdown: **bold**/__bold__, *italic*/_italic_, `code`, ~~strike~~, [links](url); blank line = new paragraph, trailing \\ = line break; bullets support nested sub-bullets (indented `- ` lines). Only profile name is required.",
     });
     match fmt {
         Format::Json => println!("{schema}"),
